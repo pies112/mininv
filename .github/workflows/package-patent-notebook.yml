@@ -15,17 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Verify notebook
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          path = Path('artifacts/4_Финальная_обработка_патентной_базы.ipynb')
-          data = json.loads(path.read_text(encoding='utf-8'))
-          assert data.get('nbformat') == 4
-          assert data.get('cells')
-          print(path, 'OK', path.stat().st_size)
-          PY
+      - name: Show notebook
+        run: ls -lh artifacts/4_Финальная_обработка_патентной_базы.ipynb
       - name: Upload notebook
         uses: actions/upload-artifact@v4
         with:

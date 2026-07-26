@@ -1,0 +1,22 @@
+name: Deliver v3 notebook artifact
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare delivery filename
+        run: cp v3_notebook.ipynb '3_Инженерный_рейтинг_2026_единая_патентная_выгрузка.ipynb'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v3-patent-notebook
+          path: 3_Инженерный_рейтинг_2026_единая_патентная_выгрузка.ipynb
+          if-no-files-found: error
+          retention-days: 1
